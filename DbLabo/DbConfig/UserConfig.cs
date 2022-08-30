@@ -15,6 +15,8 @@ namespace DbLabo.DbConfig
         {
             builder.ToTable("users");
 
+            builder.HasKey(us=>us.IdUser);
+
             builder.Property(us => us.Email)
                 .IsRequired()
                 .HasMaxLength(384);

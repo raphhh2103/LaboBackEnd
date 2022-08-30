@@ -15,6 +15,8 @@ namespace DbLabo.DbConfig
         {
             builder.ToTable("Skill");
 
+            builder.HasKey(sk=>sk.IdSkill);
+
             builder.Property(sk => sk.Name)
                 .IsRequired()
                 .HasMaxLength(100);

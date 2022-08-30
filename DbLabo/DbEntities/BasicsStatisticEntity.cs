@@ -2,6 +2,7 @@
 {
     public class BasicsStatisticEntity
     {
+        public int IdBasicsStatistic { get; set; }
         public int Hp { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }

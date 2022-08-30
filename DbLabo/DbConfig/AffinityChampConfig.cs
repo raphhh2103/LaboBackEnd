@@ -15,6 +15,8 @@ namespace DbLabo.DbConfig
         {
             builder.ToTable("AffinityChamp");
 
+            builder.HasKey(afc=>afc.IdAffinityChamp);
+
             builder.Property(afc => afc.Weak)
                 .IsRequired()
                 .HasMaxLength(50);

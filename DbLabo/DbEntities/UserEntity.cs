@@ -8,6 +8,7 @@ namespace DbLabo.DbEntities
 {
     public class UserEntity
     {
+        public int IdUser { get; set; }
         public string Email { get; set; }
 
         public string Passwd { get; set; }

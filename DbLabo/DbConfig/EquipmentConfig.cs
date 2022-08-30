@@ -15,6 +15,8 @@ namespace DbLabo.DbConfig
         {
             builder.ToTable("Equipment");
 
+            builder.HasKey(eq => eq.IdEquipment);
+
             builder.Property(eq => eq.Type)
                 .IsRequired()
                 .HasMaxLength(100);

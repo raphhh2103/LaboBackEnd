@@ -14,6 +14,7 @@ namespace DbLabo.DbConfig
         public void Configure(EntityTypeBuilder<ChampEntity> builder)
         {
             builder.ToTable("Champ");
+            builder.HasKey(ch => ch.IdChamp);
 
             builder.Property(ch => ch.Name)
                 .IsRequired()

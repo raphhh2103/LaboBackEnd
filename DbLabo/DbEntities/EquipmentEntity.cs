@@ -8,6 +8,7 @@ namespace DbLabo.DbEntities
 {
     public class EquipmentEntity
     {
+        public int IdEquipment { get; set; }
         public string Type { get; set; }
 
         public string Effect { get; set; }

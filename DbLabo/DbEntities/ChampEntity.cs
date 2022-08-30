@@ -8,6 +8,7 @@ namespace DbLabo.DbEntities
 {
     public class ChampEntity
     {
+        public int IdChamp { get; set; }
         public string Name { get; set; }
 
         public BasicsStatisticEntity? BasicsStatistics { get; set; }

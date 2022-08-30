@@ -15,6 +15,8 @@ namespace DbLabo.DbConfig
         {
             builder.ToTable("BasicStatistic");
 
+            builder.HasKey(bs => bs.IdBasicsStatistic);
+
             builder.Property(bs => bs.Hp);
 
             builder.Property(bs => bs.Atk);
