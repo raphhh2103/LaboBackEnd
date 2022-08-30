@@ -10,13 +10,10 @@ namespace DbLabo.DbEntities
     {
         public string Name { get; set; }
 
-        public BasicsStatistic BasicsStatistics { get; set; }
+        public BasicsStatisticEntity? BasicsStatistics { get; set; }
 
-        public AffinityChampEntity Affinity { get; set; }
+        public AffinityChampEntity? Affinity { get; set; }
 
-        public IEnumerable<SkillEntity> Skills { get; set; }
-
-
-
+        public IEnumerable<SkillEntity>? Skills { get; set; }
     }
 }
