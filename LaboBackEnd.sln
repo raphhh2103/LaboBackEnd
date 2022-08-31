@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboBackEnd", "LaboBackEnd\LaboBackEnd.csproj", "{9C799DE6-36CE-4461-B20D-A9500E581EDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaboBackEnd", "LaboBackEnd\LaboBackEnd.csproj", "{9C799DE6-36CE-4461-B20D-A9500E581EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbLabo", "DbLabo\DbLabo.csproj", "{32BFB46B-A636-4281-8108-2C5581E19FE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLabo", "DbLabo\DbLabo.csproj", "{32BFB46B-A636-4281-8108-2C5581E19FE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboBLL", "LaboBLL\LaboBLL.csproj", "{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{32BFB46B-A636-4281-8108-2C5581E19FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32BFB46B-A636-4281-8108-2C5581E19FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32BFB46B-A636-4281-8108-2C5581E19FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
