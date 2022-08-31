@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DbLabo.Repositories
 {
-    internal class AffinityChampRepository : IRepository<AffinityChampEntity>
+    public class AffinityChampRepository : IRepository<AffinityChampEntity>
     {
         public AffinityChampEntity Create(AffinityChampEntity entity)
         {

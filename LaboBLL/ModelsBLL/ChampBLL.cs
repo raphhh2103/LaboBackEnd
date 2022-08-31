@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DbLabo.DbEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,13 @@ namespace LaboBLL.ModelsBLL
         public AffinityChampBLL? Affinity { get; set; }
 
         public IEnumerable<SkillBLL>? Skills { get; set; }
+
+        internal ChampEntity ToBLL()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
-}
+
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DbLabo.Repositories
 {
-    internal class BasicsStatisticRepository : IRepository<BasicsStatisticEntity>
+    public class BasicsStatisticRepository : IRepository<BasicsStatisticEntity>
     {
         public BasicsStatisticEntity Create(BasicsStatisticEntity entity)
         {

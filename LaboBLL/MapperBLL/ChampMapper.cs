@@ -30,7 +30,24 @@ namespace LaboBLL.MapperBLL
             //return null;
         }
 
+        public static ChampBLL ToBLL(this ChampEntity champ)
+        {
+            List<SkillBLL> list = new List<SkillBLL>();
+            foreach (var item in champ.Skills)
+            {
+                list.Add(item.ToBLL());
+            }
 
+            return new ChampBLL()
+            {
+                Name = champ.Name,
+                Affinity = champ.Affinity.ToBLL(),
+                BasicsStatistics = champ.BasicsStatistics.ToBLL(),
+                Skills = list,
+                IdChamp = champ.IdChamp
+            };
+
+        }
 
     }
 }
