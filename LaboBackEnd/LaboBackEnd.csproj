@@ -10,4 +10,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LaboBLL\LaboBLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModelsAPI\" />
+    <Folder Include="MapperAPI\" />
+    <Folder Include="ServiceAPI\" />
+  </ItemGroup>
+
 </Project>
