@@ -63,7 +63,16 @@ namespace DbLabo.Repositories
 
         public EquipmentEntity Update(EquipmentEntity entity)
         {
-            throw new NotImplementedException();
+            EquipmentEntity equipment = new EquipmentEntity();
+
+            using(DbConnect db = new DbConnect())
+            {
+                db.Equipments.Update(entity);
+                db.SaveChanges();
+                equipment = db.Equipments.Find(entity);
+            }
+            return equipment;
+
         }
     }
 }
