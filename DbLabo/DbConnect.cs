@@ -20,12 +20,13 @@ namespace DbLabo
         public DbSet<BasicsStatisticEntity> BasicsStatistics { get; set; }
         public DbSet<AffinityChampEntity> AffinityChamps { get; set; }
 
-        public DbConnect() => this._connectionString = @"Data Source=(localhost);Initial Catalog=DbLaboBadge;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public DbConnect() => this._connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DbLaboBadge;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+      //public DbConnect() =>this._connectionString = @"Data Source=NETLAB204\TFTIC;Initial Catalog=DbLaboBadge;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public DbConnect(string connectionString):base()
         {
             this._connectionString = connectionString;
         }
-    
+    ///NETLAB204\TFTIC
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableDetailedErrors();
