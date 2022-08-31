@@ -22,12 +22,17 @@ namespace LaboBLL.MapperBLL
             };
         }
 
-        public static UserBLL ToBLL(this UserEntity userEntity)
+        public static UserBLL ToBLL(this UserEntity user)
         {
             return new UserBLL()
             {
+                Email = user.Email,
+                Passwd = user.Passwd,
+                SaltKey = user.SaltKey,
+                Rule = user.Rule,
+                IdUser = user.IdUser,
 
-            }
+            };
         }
 
     }

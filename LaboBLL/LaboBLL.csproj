@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MapperBLL\" />
     <Folder Include="ServicesBLL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DbLabo\DbLabo.csproj" />
   </ItemGroup>
 
 </Project>
