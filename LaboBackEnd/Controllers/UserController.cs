@@ -51,8 +51,6 @@ namespace LaboBackEnd.Controllers
                 _userServiceBLL.Update(us);
             }
 
-
-
             return Ok(us.ToAPI());
         }
 
