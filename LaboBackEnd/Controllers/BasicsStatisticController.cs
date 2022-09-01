@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
-    [Route("api/[BasicStat]")]
     [ApiController]
+    [Route("BasicStat")]
     public class BasicsStatisticController : ControllerBase
     {
         private readonly BasicsStatisticServiceMapper _basicsStatisticService;

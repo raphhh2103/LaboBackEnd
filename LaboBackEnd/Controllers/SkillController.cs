@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
-    [Route("api/[Skill]")]
     [ApiController]
+    [Route("Skill")]
     public class SkillController : ControllerBase
     {
         private readonly SkillServiceMapper _skillService;

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
-    [Route("api/[Equipment]")]
     [ApiController]
+    [Route("Equipment")]
     public class EquipmentController : ControllerBase
     {
         private readonly EquipmentServiceMapper _equipmentServiceMapper;

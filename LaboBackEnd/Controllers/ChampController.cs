@@ -6,8 +6,8 @@ using LaboBackEnd.MapperAPI;
 
 namespace LaboBackEnd.Controllers
 {
-    [Route("api/[Champ]")]
     [ApiController]
+    [Route("Champ")]
     public class ChampController : ControllerBase
     {
         private readonly ChampServiceMapper _champService;

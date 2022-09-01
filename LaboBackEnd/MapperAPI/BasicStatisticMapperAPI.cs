@@ -22,7 +22,7 @@ namespace LaboBackEnd.MapperAPI
 
             };
         }
-        public static BasicStatisticAPI ToAPI(this BasicsStatisticBLL basicsStatistic)
+        public static BasicStatisticAPI ToAPI(this BasicsStatisticBLL basicStatistic)
         {
             return new BasicStatisticAPI()
             {

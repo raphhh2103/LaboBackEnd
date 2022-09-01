@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
-    [Route("api/[AffinityChamp]")]
     [ApiController]
+    [Route("AffinityChamp")]
     public class AffinityChampController : ControllerBase
     {
         private readonly AffinityChampServiceMapper _affinityChampServiceMapper;
