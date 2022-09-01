@@ -5,7 +5,7 @@ namespace LaboBackEnd.MapperAPI
 {
     public static class ChampMapperAPI
     {
-        public static ChampBLL ToBLL(this ChampBLL champ)
+        public static ChampBLL ToBLL(this ChampAPI champ)
         {
             return new ChampBLL()
             {

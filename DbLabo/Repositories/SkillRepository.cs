@@ -53,10 +53,13 @@ namespace DbLabo.Repositories
 
         public SkillEntity GetOne(string str)
         {
+            int id;
+            int.TryParse(str, out id);
+
             SkillEntity skill = new SkillEntity();
             using (DbConnect db = new DbConnect())
             {
-                skill = db.Skills.Find(str);
+                skill = db.Skills.Find(id);
             }
             return skill;
         }

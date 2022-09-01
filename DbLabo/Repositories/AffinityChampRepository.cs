@@ -39,11 +39,13 @@ namespace DbLabo.Repositories
 
         public AffinityChampEntity GetOne(string str)
         {
+            int id;
             AffinityChampEntity afc = new AffinityChampEntity();
+            int.TryParse(str, out id);
 
             using (DbConnect db = new DbConnect())
             {
-                afc = db.AffinityChamps.Find(str);
+                afc = db.AffinityChamps.Find(id);
             }
             return afc;
         }

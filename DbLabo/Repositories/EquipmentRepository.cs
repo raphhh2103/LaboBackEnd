@@ -53,10 +53,12 @@ namespace DbLabo.Repositories
 
         public EquipmentEntity GetOne(string str)
         {
+            int id;
+            int.TryParse(str, out id);
            EquipmentEntity entity = new EquipmentEntity();
             using (DbConnect db = new DbConnect())
             {
-                entity = db.Equipments.Find(str);
+                entity = db.Equipments.Find(id);
             }
             return entity;
         }
