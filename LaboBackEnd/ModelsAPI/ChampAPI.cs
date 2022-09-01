@@ -1,13 +1,8 @@
-﻿using DbLabo.DbEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LaboBLL.ModelsBLL;
 
-namespace LaboBLL.ModelsBLL
+namespace LaboBackEnd.ModelsAPI
 {
-    public class ChampBLL
+    public class ChampAPI
     {
         public int IdChamp { get; set; }
         public string Name { get; set; }
@@ -18,9 +13,5 @@ namespace LaboBLL.ModelsBLL
 
         public IEnumerable<SkillBLL>? Skills { get; set; }
 
-    
     }
-
-
-
 }

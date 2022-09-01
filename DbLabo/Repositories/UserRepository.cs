@@ -55,7 +55,8 @@ namespace DbLabo.Repositories
 
             using (DbConnect db = new DbConnect())
             {
-                entity = db.Users.Find(str);
+                entity = db.Users.Where(us => us.Email == str).FirstOrDefault();
+                //entity= db.Users.Select( str)
             }
             return entity;
         }
@@ -67,7 +68,7 @@ namespace DbLabo.Repositories
             {
                 db.Users.Update(entity);
                 db.SaveChanges();
-                userEntity = db.Users.Find(entity.Email);
+                userEntity = db.Users.Where(us => us.Email == entity.Email).FirstOrDefault(); ;
             }
             return userEntity;
 
