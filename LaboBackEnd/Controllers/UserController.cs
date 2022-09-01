@@ -55,34 +55,6 @@ namespace LaboBackEnd.Controllers
 
             return Ok(us.ToAPI());
         }
-        /*
-         *     
-         *     public async Task<IActionResult> Put(int id, [FromBody] J_Personnes majPersonne)
-        {
-            PersonneEntity user = await _userManager.FindByIdAsync(id.ToString());
-            var result = await _signInManager.CheckPasswordSignInAsync(user, majPersonne.PasswordHash, false);
-            if (result.Succeeded)
-            {
-                user.Email = majPersonne.Email;
-                user.UserName = majPersonne.Email;
-                user.EmailConfirmed = true;
-                user.SecurityStamp = (DateTime.Now - new DateTime(1970, 1, 1)).TotalSeconds.ToString();
-            }
-            try
-            {
-                _context.SaveChanges();
-                return Ok();
-            }
-            catch (Exception)
-            {
-                _context.Personnes.Remove(user);
-                return BadRequest();
-            }
-        }
-         * 
-         */
-
-
 
     }
 }
