@@ -27,6 +27,7 @@ builder.Services.AddTransient(typeof(AffinityChampServiceMapper));
 var app = builder.Build();
 
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
