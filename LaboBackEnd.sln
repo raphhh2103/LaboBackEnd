@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbLabo", "DbLabo\DbLabo.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LaboBLL", "LaboBLL\LaboBLL.csproj", "{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtBehavior", "JwtBehavior\JwtBehavior.csproj", "{1D2791F2-7176-4A61-A150-7770E29490EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8E05E55-0A25-47F1-ABCB-0B99DFF6F750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D2791F2-7176-4A61-A150-7770E29490EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D2791F2-7176-4A61-A150-7770E29490EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D2791F2-7176-4A61-A150-7770E29490EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D2791F2-7176-4A61-A150-7770E29490EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
