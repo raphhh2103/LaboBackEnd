@@ -16,7 +16,6 @@ namespace DbLabo.Repositories
         {
             this._dbConnect = dbConnect;
         }
-
         public ChampEntity Create(ChampEntity entity)
         {
             try
