@@ -11,14 +11,23 @@ namespace DbLabo.Repositories
 {
     public class SkillRepository : IRepository<SkillEntity>
     {
+
+        private readonly DbConnect _dbConnect;
+
+        public SkillRepository(DbConnect dbConnect)
+        {
+            this._dbConnect = dbConnect;
+        }
+
+
         public SkillEntity Create(SkillEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Skills.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.Skills.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
                 return entity;
             }
@@ -29,12 +38,12 @@ namespace DbLabo.Repositories
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    var skl = db.Skills.Where(sk => sk.Name == str).FirstOrDefault();
+                    var skl = _dbConnect.Skills.Where(sk => sk.Name == str).FirstOrDefault();
                     if (skl != null && skl is SkillEntity)
                     {
-                        db.Remove(skl);
+                        _dbConnect.Remove(skl);
                     }
                 }
 
@@ -54,12 +63,13 @@ namespace DbLabo.Repositories
         }
 
         public IEnumerable<SkillEntity> GetAll()
-        {try
+        {
+            try
             {
                 List<SkillEntity> list = new List<SkillEntity>();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    list = db.Skills.AsQueryable().ToList();
+                    list = _dbConnect.Skills.AsQueryable().ToList();
                 }
                 return list;
             }
@@ -67,15 +77,16 @@ namespace DbLabo.Repositories
         }
 
         public SkillEntity GetOne(string str)
-        {try
+        {
+            try
             {
                 int id;
                 int.TryParse(str, out id);
 
                 SkillEntity skill = new SkillEntity();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    skill = db.Skills.Find(id);
+                    skill = _dbConnect.Skills.Find(id);
                 }
                 return skill;
             }
@@ -87,11 +98,11 @@ namespace DbLabo.Repositories
             try
             {
                 SkillEntity skl = new SkillEntity();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Skills.Update(entity);
-                    db.SaveChanges();
-                    skl = db.Skills.Find(entity.Name);
+                    _dbConnect.Skills.Update(entity);
+                    _dbConnect.SaveChanges();
+                    skl = _dbConnect.Skills.Find(entity.Name);
                 }
 
                 return skl;

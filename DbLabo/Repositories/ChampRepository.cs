@@ -1,5 +1,6 @@
 ﻿using DbLabo.DbEntities;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +11,43 @@ namespace DbLabo.Repositories
 {
     public class ChampRepository : IRepository<ChampEntity>
     {
+        private readonly DbConnect _dbConnect;
+        public ChampRepository(DbConnect dbConnect)
+        {
+            this._dbConnect = dbConnect;
+        }
+
         public ChampEntity Create(ChampEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Champs.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.Champs.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
                 return entity;
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
         }
 
         public ChampEntity Delete(string str)
         {
-
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    var chm = db.Champs.Where(ch => ch.Name == str).FirstOrDefault();
+                    var chm = _dbConnect.Champs
+                        .Where(ch => ch.Name.Equals(str))
+                        .Include(aff => aff.Affinity)
+                        .Include(bst => bst.BasicsStatistics)
+                        .Include(sk => sk.Skills)
+                        .FirstOrDefault();
                     if (chm != null && chm is ChampEntity)
-                        db.Remove(chm);
+                        _dbConnect.Remove(chm);
                 }
                 return new ChampEntity()
                 {
@@ -45,16 +55,12 @@ namespace DbLabo.Repositories
                     Affinity = null,
                     BasicsStatistics = null,
                     Skills = null,
-
                 };
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
-
- 
         }
 
         public IEnumerable<ChampEntity> GetAll()
@@ -62,60 +68,59 @@ namespace DbLabo.Repositories
             try
             {
                 List<ChampEntity> list = new List<ChampEntity>();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    list = db.Champs.AsQueryable().ToList();
+                    list = _dbConnect.Champs
+                        .Include(aff => aff.Affinity)
+                        .Include(bst => bst.BasicsStatistics)
+                        .Include(sk => sk.Skills).ToList();
                 }
                 return list;
-
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
-
-
         }
-
         public ChampEntity GetOne(string str)
         {
             try
             {
-                ChampEntity entity = new ChampEntity();
-                using (DbConnect db = new DbConnect())
+                ChampEntity? entity = new ChampEntity();
+                //ChampEntity entity2 = new ChampEntity();
+                using (_dbConnect)
                 {
-                    entity = db.Champs.Where(chmp => chmp.Name == str).FirstOrDefault(); ;
+                     entity = _dbConnect.Champs
+                        .Where(ch => ch.Name.Equals(str))
+                        .Include(aff => aff.Affinity)
+                        .Include(bst => bst.BasicsStatistics)
+                        .Include(sk=> sk.Skills)
+                        .FirstOrDefault();
                 }
+                if (entity == null) throw new Exception("oups we have a problem ! ");
                 return entity;
             }
             catch (SqlException ex)
             {
                 throw ex;
             }
-
-
         }
-
         public ChampEntity Update(ChampEntity entity)
         {
             try
             {
-
-                ChampEntity chm = new ChampEntity();
-
-                using (DbConnect db = new DbConnect())
+                ChampEntity? chm = new ChampEntity();
+                using (_dbConnect)
                 {
-                    db.Champs.Update(entity);
-                    db.SaveChanges();
-                    chm = db.Champs.Find(entity.IdChamp);
+                    _dbConnect.Champs.Update(entity);
+                    _dbConnect.SaveChanges();
+                    chm = _dbConnect.Champs.Find(entity.IdChamp);
                 }
-
+                if (chm == null) throw new Exception("oups ! we have a problem !");
                 return chm;
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
         }

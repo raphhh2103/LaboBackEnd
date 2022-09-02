@@ -33,9 +33,13 @@ namespace LaboBLL.MapperBLL
         public static ChampBLL ToBLL(this ChampEntity champ)
         {
             List<SkillBLL> list = new List<SkillBLL>();
-            foreach (var item in champ.Skills)
+            if (champ.Skills != null)
             {
-                list.Add(item.ToBLL());
+                foreach (var item in champ.Skills)
+
+                {
+                    list.Add(item.ToBLL());
+                }
             }
 
             return new ChampBLL()

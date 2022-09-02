@@ -11,14 +11,20 @@ namespace DbLabo.Repositories
 {
     public class AffinityChampRepository : IRepository<AffinityChampEntity>
     {
+        private readonly DbConnect _dbConnect;
+        public AffinityChampRepository(DbConnect dbConnect)
+        {
+            this._dbConnect = dbConnect; 
+        }
+
         public AffinityChampEntity Create(AffinityChampEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect )
                 {
-                    db.AffinityChamps.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.AffinityChamps.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
 
                 return entity;
@@ -40,10 +46,10 @@ namespace DbLabo.Repositories
 
                 if (id != 0)
                 {
-                    using(DbConnect db = new DbConnect())
+                    using(_dbConnect)
                     {
-                       AffinityChampEntity afc =  db.AffinityChamps.Where(aff => aff.IdAffinityChamp == id).FirstOrDefault();
-                        db.Remove(afc);
+                       AffinityChampEntity afc = _dbConnect.AffinityChamps.Where(aff => aff.IdAffinityChamp == id).FirstOrDefault();
+                        _dbConnect.Remove(afc);
 
                         return new AffinityChampEntity()
                         {
@@ -72,9 +78,9 @@ namespace DbLabo.Repositories
             {
                 List<AffinityChampEntity> entities = new List<AffinityChampEntity>();
 
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    entities = db.AffinityChamps.AsQueryable().ToList();
+                    entities = _dbConnect.AffinityChamps.AsQueryable().ToList();
                 }
                 return entities;
             }
@@ -93,9 +99,9 @@ namespace DbLabo.Repositories
                 AffinityChampEntity afc = new AffinityChampEntity();
                 int.TryParse(str, out id);
 
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    afc = db.AffinityChamps.Find(id);
+                    afc = _dbConnect.AffinityChamps.Find(id);
                 }
                 return afc;
             }
@@ -111,11 +117,11 @@ namespace DbLabo.Repositories
             try
             {
                 AffinityChampEntity afc = new AffinityChampEntity();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.AffinityChamps.Update(entity);
-                    db.SaveChanges();
-                    afc = db.AffinityChamps.Find(entity.IdAffinityChamp);
+                    _dbConnect.AffinityChamps.Update(entity);
+                    _dbConnect.SaveChanges();
+                    afc = _dbConnect.AffinityChamps.Find(entity.IdAffinityChamp);
                 }
                 return afc;
             }

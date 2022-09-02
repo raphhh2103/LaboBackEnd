@@ -10,14 +10,22 @@ namespace DbLabo.Repositories
 {
     public class BasicsStatisticRepository : IRepository<BasicsStatisticEntity>
     {
+        private readonly DbConnect _dbConnect;
+
+        public BasicsStatisticRepository(DbConnect dbConnect)
+        {
+            _dbConnect = dbConnect;
+        }
+
+
         public BasicsStatisticEntity Create(BasicsStatisticEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.BasicsStatistics.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.BasicsStatistics.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
                 return entity;
             }
@@ -35,11 +43,11 @@ namespace DbLabo.Repositories
                 int dt;
                 if (int.TryParse(str, out dt))
                 {
-                    using (DbConnect db = new DbConnect())
+                    using (_dbConnect)
                     {
-                        var bs = db.BasicsStatistics.Where(bst => bst.IdBasicsStatistic == dt).FirstOrDefault();
-                        if (bs != null && db is BasicsStatisticEntity)
-                            db.Remove(bs);
+                        var bs = _dbConnect.BasicsStatistics.Where(bst => bst.IdBasicsStatistic == dt).FirstOrDefault();
+                        if (bs != null && _dbConnect is BasicsStatisticEntity)
+                            _dbConnect.Remove(bs);
                     }
                 }
                 else
@@ -72,9 +80,9 @@ namespace DbLabo.Repositories
             try
             {
                 List<BasicsStatisticEntity> list = new List<BasicsStatisticEntity>();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    list = db.BasicsStatistics.AsQueryable().ToList();
+                    list = _dbConnect.BasicsStatistics.AsQueryable().ToList();
                 }
                 return list;
             }
@@ -94,9 +102,9 @@ namespace DbLabo.Repositories
 
                 if (int.TryParse(str, out id))
                 {
-                    using (DbConnect db = new DbConnect())
+                    using (_dbConnect)
                     {
-                        bst = db.BasicsStatistics.Find(id);
+                        bst = _dbConnect.BasicsStatistics.Find(id);
                     }
                 }
                 return bst;
@@ -113,10 +121,10 @@ namespace DbLabo.Repositories
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.BasicsStatistics.Update(entity);
-                    db.SaveChanges();
+                    _dbConnect.BasicsStatistics.Update(entity);
+                    _dbConnect.SaveChanges();
 
                 }
                 return entity;

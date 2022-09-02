@@ -1,6 +1,8 @@
+using DbLabo;
 using DbLabo.Repositories;
 using LaboBackEnd.Context;
 using LaboBLL.ServicesBLL;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IContext>(cont => new Context());
 builder.Services.AddTransient(typeof(UserRepository));
 builder.Services.AddTransient(typeof(UserSericeBLL));
 builder.Services.AddTransient(typeof(SkillRepository));
@@ -24,6 +25,10 @@ builder.Services.AddTransient(typeof(BasicsStatisticRepository));
 builder.Services.AddTransient(typeof(BasicsStatisticServiceMapper));
 builder.Services.AddTransient(typeof(AffinityChampRepository));
 builder.Services.AddTransient(typeof(AffinityChampServiceMapper));
+
+builder.Services.AddDbContext<DbConnect>(db => db.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+    //builder.Services.AddDbContext<Badge2022Context>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Badge2022Works")));
+
 var app = builder.Build();
 
 

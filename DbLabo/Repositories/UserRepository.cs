@@ -10,14 +10,23 @@ namespace DbLabo.Repositories
 {
     public class UserRepository : IRepository<UserEntity>
     {
+
+        private readonly DbConnect _dbConnect;
+
+        public UserRepository(DbConnect dbConnect)
+        {
+            this._dbConnect = dbConnect;
+        }
+
+
         public UserEntity Create(UserEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Users.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.Users.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
                 return entity;
             }
@@ -32,12 +41,12 @@ namespace DbLabo.Repositories
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    var us = db.Users.Where(u => u.Email == str).FirstOrDefault();
+                    var us = _dbConnect.Users.Where(u => u.Email == str).FirstOrDefault();
 
                     if (us != null && us is UserEntity)
-                        db.Remove(us);
+                        _dbConnect.Remove(us);
                 }
 
                 return new UserEntity()
@@ -61,9 +70,9 @@ namespace DbLabo.Repositories
             try
             {
                 List<UserEntity> list = new List<UserEntity>();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    list = db.Users.AsQueryable().ToList();
+                    list = _dbConnect.Users.AsQueryable().ToList();
                 }
                 return list;
             }
@@ -80,9 +89,9 @@ namespace DbLabo.Repositories
             {
                 UserEntity entity = new UserEntity();
 
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    entity = db.Users.Where(us => us.Email == str).FirstOrDefault();
+                    entity = _dbConnect.Users.Where(us => us.Email == str).FirstOrDefault();
                     //entity= db.Users.Select( str)
                 }
                 return entity;
@@ -99,11 +108,11 @@ namespace DbLabo.Repositories
             try
             {
                 UserEntity userEntity = new UserEntity();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Users.Update(entity);
-                    db.SaveChanges();
-                    userEntity = db.Users.Where(us => us.Email == entity.Email).FirstOrDefault(); ;
+                    _dbConnect.Users.Update(entity);
+                    _dbConnect.SaveChanges();
+                    userEntity = _dbConnect.Users.Where(us => us.Email == entity.Email).FirstOrDefault(); ;
                 }
                 return userEntity;
             }

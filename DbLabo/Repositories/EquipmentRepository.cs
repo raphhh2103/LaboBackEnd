@@ -10,14 +10,22 @@ namespace DbLabo.Repositories
 {
     public class EquipmentRepository : IRepository<EquipmentEntity>
     {
+
+        private readonly DbConnect _dbConnect;
+
+        public EquipmentRepository(DbConnect dbConnect)
+        {
+                this._dbConnect = dbConnect;
+        }
+
         public EquipmentEntity Create(EquipmentEntity entity)
         {
             try
             {
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Equipments.Add(entity);
-                    db.SaveChanges();
+                    _dbConnect.Equipments.Add(entity);
+                    _dbConnect.SaveChanges();
                 }
                 return entity;
             }
@@ -34,12 +42,12 @@ namespace DbLabo.Repositories
             {
                 int id;
                 int.TryParse(str, out id);
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    var eqp = db.Equipments.Where(eq => eq.IdEquipment == id).FirstOrDefault();
+                    var eqp = _dbConnect.Equipments.Where(eq => eq.IdEquipment == id).FirstOrDefault();
                     if (eqp != null && eqp is EquipmentEntity)
                     {
-                        db.Remove(eqp);
+                        _dbConnect.Remove(eqp);
                     }
                 }
                 return new EquipmentEntity()
@@ -61,9 +69,9 @@ namespace DbLabo.Repositories
             try
             {
                 List<EquipmentEntity> list = new List<EquipmentEntity>();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    list = db.Equipments.AsQueryable().ToList();
+                    list = _dbConnect.Equipments.AsQueryable().ToList();
 
                 }
                 return list;
@@ -73,7 +81,7 @@ namespace DbLabo.Repositories
 
                 throw ex;
             }
-        
+
         }
 
         public EquipmentEntity GetOne(string str)
@@ -83,9 +91,9 @@ namespace DbLabo.Repositories
                 int id;
                 int.TryParse(str, out id);
                 EquipmentEntity entity = new EquipmentEntity();
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    entity = db.Equipments.Find(id);
+                    entity = _dbConnect.Equipments.Find(id);
                 }
                 return entity;
             }
@@ -102,11 +110,11 @@ namespace DbLabo.Repositories
             {
                 EquipmentEntity equipment = new EquipmentEntity();
 
-                using (DbConnect db = new DbConnect())
+                using (_dbConnect)
                 {
-                    db.Equipments.Update(entity);
-                    db.SaveChanges();
-                    equipment = db.Equipments.Find(entity);
+                    _dbConnect.Equipments.Update(entity);
+                    _dbConnect.SaveChanges();
+                    equipment = _dbConnect.Equipments.Find(entity);
                 }
                 return equipment;
             }

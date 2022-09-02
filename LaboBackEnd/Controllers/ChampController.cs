@@ -11,10 +11,14 @@ namespace LaboBackEnd.Controllers
     public class ChampController : ControllerBase
     {
         private readonly ChampServiceMapper _champService;
+        private readonly SkillServiceMapper _skillService;
+        private readonly AffinityChampServiceMapper _affinityChampService;
 
-        public ChampController(ChampServiceMapper champService)
+        public ChampController(ChampServiceMapper champService, SkillServiceMapper skillService, AffinityChampServiceMapper affinityChampService)
         {
             this._champService = champService;
+            this._skillService = skillService;
+            this._affinityChampService = affinityChampService;
         }
 
 
@@ -27,7 +31,14 @@ namespace LaboBackEnd.Controllers
         [HttpGet]
         public IActionResult GetAllChamp()
         {
-            return Ok(_champService.GetAll());
+            List<ChampAPI> list = new List<ChampAPI>();
+            foreach (var item in _champService.GetAll())
+            {
+
+                list.Add(item.ToAPI());
+     
+            }
+            return Ok(list);
         }
 
         [HttpGet("{Name}")]
@@ -39,9 +50,9 @@ namespace LaboBackEnd.Controllers
         [HttpPut("Name")]
         public IActionResult UpdateChamp(string Name, [FromBody] ChampAPI champ)
         {
-           ChampAPI ch =  _champService.GetOne(Name).ToAPI();
+            ChampAPI ch = _champService.GetOne(Name).ToAPI();
 
-            if (ch !=null)
+            if (ch != null)
             {
                 ch.Name = champ.Name;
                 ch.Affinity = champ.Affinity;
