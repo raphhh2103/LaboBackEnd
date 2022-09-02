@@ -1,4 +1,5 @@
 ﻿using DbLabo.DbEntities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,69 +12,109 @@ namespace DbLabo.Repositories
     {
         public EquipmentEntity Create(EquipmentEntity entity)
         {
-            using (DbConnect db = new DbConnect())
+            try
             {
-                db.Equipments.Add(entity);
-                db.SaveChanges();
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Equipments.Add(entity);
+                    db.SaveChanges();
+                }
+                return entity;
             }
-            return entity;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
 
         public EquipmentEntity Delete(string str)
         {
-            int id;
-            int.TryParse(str, out id);
-            using (DbConnect db = new DbConnect())
+            try
             {
-               var eqp =  db.Equipments.Where(eq => eq.IdEquipment == id).FirstOrDefault();
-                if (eqp != null && eqp is EquipmentEntity)
+                int id;
+                int.TryParse(str, out id);
+                using (DbConnect db = new DbConnect())
                 {
-                    db.Remove(eqp);
+                    var eqp = db.Equipments.Where(eq => eq.IdEquipment == id).FirstOrDefault();
+                    if (eqp != null && eqp is EquipmentEntity)
+                    {
+                        db.Remove(eqp);
+                    }
                 }
+                return new EquipmentEntity()
+                {
+                    Effect = "deleted",
+                    NbPartsRequired = 0,
+                    Type = " deleted"
+                };
             }
-            return new EquipmentEntity()
+            catch (SqlException ex)
             {
-                Effect = "deleted",
-                NbPartsRequired = 0,
-                Type = " deleted"
-            };
+
+                throw ex;
+            }
         }
 
         public IEnumerable<EquipmentEntity> GetAll()
         {
-            List<EquipmentEntity> list = new List<EquipmentEntity>();
-            using (DbConnect db = new DbConnect())
+            try
             {
-                list = db.Equipments.AsQueryable().ToList();
+                List<EquipmentEntity> list = new List<EquipmentEntity>();
+                using (DbConnect db = new DbConnect())
+                {
+                    list = db.Equipments.AsQueryable().ToList();
 
+                }
+                return list;
             }
-            return list;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         
         }
 
         public EquipmentEntity GetOne(string str)
         {
-            int id;
-            int.TryParse(str, out id);
-           EquipmentEntity entity = new EquipmentEntity();
-            using (DbConnect db = new DbConnect())
+            try
             {
-                entity = db.Equipments.Find(id);
+                int id;
+                int.TryParse(str, out id);
+                EquipmentEntity entity = new EquipmentEntity();
+                using (DbConnect db = new DbConnect())
+                {
+                    entity = db.Equipments.Find(id);
+                }
+                return entity;
             }
-            return entity;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
 
         public EquipmentEntity Update(EquipmentEntity entity)
         {
-            EquipmentEntity equipment = new EquipmentEntity();
-
-            using(DbConnect db = new DbConnect())
+            try
             {
-                db.Equipments.Update(entity);
-                db.SaveChanges();
-                equipment = db.Equipments.Find(entity);
+                EquipmentEntity equipment = new EquipmentEntity();
+
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Equipments.Update(entity);
+                    db.SaveChanges();
+                    equipment = db.Equipments.Find(entity);
+                }
+                return equipment;
             }
-            return equipment;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
 
         }
     }

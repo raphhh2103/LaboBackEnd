@@ -1,4 +1,5 @@
 ﻿using DbLabo.DbEntities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,66 +12,106 @@ namespace DbLabo.Repositories
     {
         public UserEntity Create(UserEntity entity)
         {
-            using(DbConnect db = new DbConnect())
+            try
             {
-                db.Users.Add(entity);
-                db.SaveChanges();
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Users.Add(entity);
+                    db.SaveChanges();
+                }
+                return entity;
             }
-            return entity;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
 
         public UserEntity Delete(string str)
         {
-            using (DbConnect db = new DbConnect())
+            try
             {
-                var us = db.Users.Where(u => u.Email == str).FirstOrDefault();
+                using (DbConnect db = new DbConnect())
+                {
+                    var us = db.Users.Where(u => u.Email == str).FirstOrDefault();
 
-                if(us != null && us is UserEntity)
-                    db.Remove(us);
+                    if (us != null && us is UserEntity)
+                        db.Remove(us);
+                }
+
+                return new UserEntity()
+                {
+                    Email = "deleted",
+                    Rule = "deleted",
+                    Passwd = "",
+                    SaltKey = null,
+                    IdUser = 0
+                };
             }
-
-            return new UserEntity()
+            catch (SqlException ex)
             {
-                Email = "deleted",
-                Rule = "deleted",
-                Passwd = "",
-                SaltKey = null,
-                IdUser = 0
-            };
+
+                throw ex;
+            }
         }
 
         public IEnumerable<UserEntity> GetAll()
         {
-            List<UserEntity> list = new List<UserEntity>();
-            using(DbConnect db=new DbConnect())
+            try
             {
-                list = db.Users.AsQueryable().ToList();
+                List<UserEntity> list = new List<UserEntity>();
+                using (DbConnect db = new DbConnect())
+                {
+                    list = db.Users.AsQueryable().ToList();
+                }
+                return list;
             }
-            return list;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
 
         public UserEntity GetOne(string str)
         {
-           UserEntity entity = new UserEntity();
-
-            using (DbConnect db = new DbConnect())
+            try
             {
-                entity = db.Users.Where(us => us.Email == str).FirstOrDefault();
-                //entity= db.Users.Select( str)
+                UserEntity entity = new UserEntity();
+
+                using (DbConnect db = new DbConnect())
+                {
+                    entity = db.Users.Where(us => us.Email == str).FirstOrDefault();
+                    //entity= db.Users.Select( str)
+                }
+                return entity;
             }
-            return entity;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
 
         public UserEntity Update(UserEntity entity)
         {
-            UserEntity userEntity = new UserEntity();
-           using(DbConnect db = new DbConnect())
+            try
             {
-                db.Users.Update(entity);
-                db.SaveChanges();
-                userEntity = db.Users.Where(us => us.Email == entity.Email).FirstOrDefault(); ;
+                UserEntity userEntity = new UserEntity();
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Users.Update(entity);
+                    db.SaveChanges();
+                    userEntity = db.Users.Where(us => us.Email == entity.Email).FirstOrDefault(); ;
+                }
+                return userEntity;
             }
-            return userEntity;
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
 
         }
     }

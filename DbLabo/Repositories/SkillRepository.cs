@@ -1,4 +1,5 @@
 ﻿using DbLabo.DbEntities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,69 +13,94 @@ namespace DbLabo.Repositories
     {
         public SkillEntity Create(SkillEntity entity)
         {
-            using (DbConnect db = new DbConnect())
+            try
             {
-                db.Skills.Add(entity);
-                db.SaveChanges();
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Skills.Add(entity);
+                    db.SaveChanges();
+                }
+                return entity;
             }
-            return entity;
-
+            catch (SqlException ex) { throw ex; }
         }
 
         public SkillEntity Delete(string str)
         {
-            using (DbConnect db = new DbConnect())
+            try
             {
-                var skl = db.Skills.Where(sk=>sk.Name == str).FirstOrDefault();
-                if (skl != null && skl is SkillEntity)
+                using (DbConnect db = new DbConnect())
                 {
-                    db.Remove(skl);
+                    var skl = db.Skills.Where(sk => sk.Name == str).FirstOrDefault();
+                    if (skl != null && skl is SkillEntity)
+                    {
+                        db.Remove(skl);
+                    }
                 }
+
+                return new SkillEntity()
+                {
+                    Name = "deleted",
+                    Description = "deleted",
+                    Effect = "deleted",
+
+                };
             }
-
-            return new SkillEntity()
+            catch (SqlException ex)
             {
-                Name = "deleted",
-                Description = "deleted",
-                Effect = "deleted",
 
-            };
+                throw ex;
+            }
         }
 
         public IEnumerable<SkillEntity> GetAll()
-        {
-            List<SkillEntity> list = new List<SkillEntity>();
-            using (DbConnect db = new DbConnect())
+        {try
             {
-                list = db.Skills.AsQueryable().ToList();
+                List<SkillEntity> list = new List<SkillEntity>();
+                using (DbConnect db = new DbConnect())
+                {
+                    list = db.Skills.AsQueryable().ToList();
+                }
+                return list;
             }
-            return list;
+            catch (SqlException ex) { throw ex; }
         }
 
         public SkillEntity GetOne(string str)
-        {
-            int id;
-            int.TryParse(str, out id);
-
-            SkillEntity skill = new SkillEntity();
-            using (DbConnect db = new DbConnect())
+        {try
             {
-                skill = db.Skills.Find(id);
+                int id;
+                int.TryParse(str, out id);
+
+                SkillEntity skill = new SkillEntity();
+                using (DbConnect db = new DbConnect())
+                {
+                    skill = db.Skills.Find(id);
+                }
+                return skill;
             }
-            return skill;
+            catch (SqlException ex) { throw ex; }
         }
 
         public SkillEntity Update(SkillEntity entity)
         {
-            SkillEntity  skl = new SkillEntity();
-            using (DbConnect db = new DbConnect())
+            try
             {
-                db.Skills.Update(entity);
-                db.SaveChanges();
-                skl = db.Skills.Find(entity.Name);
-            }
+                SkillEntity skl = new SkillEntity();
+                using (DbConnect db = new DbConnect())
+                {
+                    db.Skills.Update(entity);
+                    db.SaveChanges();
+                    skl = db.Skills.Find(entity.Name);
+                }
 
-            return skl;
+                return skl;
+            }
+            catch (SqlException ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
