@@ -43,9 +43,7 @@ namespace JwtBehavior.JwtHelpers
                         expires: new DateTimeOffset(expireTime).DateTime,
                         signingCredentials: new SigningCredentials(
                             new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256
-                            )
-                        
-                        );
+                            ));
                 
                     userTokens.Token = new JwtSecurityTokenHandler().WriteToken(JWTToken);
                     userTokens.IsOwner= model.IsOwner;
