@@ -9,27 +9,27 @@ using Microsoft.AspNetCore.Mvc;
 using jwt = JwtBehavior.JwtHelpers;
 namespace LaboBackEnd.Controllers
 {
-    [Route("Account")]
     [ApiController]
+    [Route("Account")]
     public class AccountController : ControllerBase
     {
         private readonly JwtSettings _jwtSettings;
         private readonly AccountServiceAPI _accountService;
 
-        public AccountController(JwtSettings jwtSettings , AccountServiceAPI accountService)
+        public AccountController(JwtSettings jwtSettings , AccountServiceAPI accountService):base()
         {
             this._jwtSettings = jwtSettings;
             this._accountService = accountService;
         }
        
         [HttpPost]
-        public IActionResult GetAuth (UserBLL userLogins)
+        public IActionResult GetAuth (UserAPI userLogins)
         {
             UserBLL user = new UserBLL();
             string str = "";
             byte[] bytes = Crypto.GenerateSalt();
 
-            user = _accountService.VerifyUser(userLogins.ToAPI());
+            user = _accountService.VerifyUser(userLogins);
             if (user != null)
             {
                 //str = userLogins.Passwd;

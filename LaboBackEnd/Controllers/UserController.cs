@@ -12,9 +12,9 @@ namespace LaboBackEnd.Controllers
     [Route("User")]
     public class UserController : ControllerBase
     {
-        private readonly UserSericeBLL _userServiceBLL;
+        private readonly UserServiceBLL _userServiceBLL;
 
-        public UserController(UserSericeBLL userSericeBLL)
+        public UserController(UserServiceBLL userSericeBLL)
         {
             this._userServiceBLL = userSericeBLL;
         }

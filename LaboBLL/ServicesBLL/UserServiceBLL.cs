@@ -9,18 +9,21 @@ using System.Threading.Tasks;
 
 namespace LaboBLL.ServicesBLL
 {
-    public class UserSericeBLL : IServiceMapper<UserBLL>
+    public class UserServiceBLL : IServiceMapper<UserBLL>
     {
         private readonly UserRepository _userRepository;
 
-        public UserSericeBLL(UserRepository userRepository)
+        public UserServiceBLL(UserRepository userRepository)
         {
             this._userRepository = userRepository;
         }
 
         public UserBLL VerifyUser(UserBLL auth)
         {
-            return _userRepository.VerifyUser(auth.ToEntity()).ToBLL();
+            UserBLL userBLL = new UserBLL();
+            userBLL = _userRepository.VerifyUser(auth.ToEntity()).ToBLL();
+
+            return userBLL;
         }
 
         public UserBLL GetOwnerCredentials(string credentialToVerify)

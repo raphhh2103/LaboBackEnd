@@ -7,9 +7,9 @@ namespace LaboBackEnd.ServiceAPI
 {
     public class AccountServiceAPI
     {
-        private readonly UserSericeBLL _userServiceBLL;
+        private readonly UserServiceBLL _userServiceBLL;
 
-        public AccountServiceAPI(UserSericeBLL  userSericeBLL)
+        public AccountServiceAPI(UserServiceBLL  userSericeBLL)
         {
             this._userServiceBLL = userSericeBLL;
         }
@@ -21,7 +21,7 @@ namespace LaboBackEnd.ServiceAPI
 
         public UserAPI GetOwnerCredentials(string credentialToVerify)
         {
-            return _userServiceBLL.GetOwnerCredentials(credentialToVerify).ToApi();
+            return _userServiceBLL.GetOwnerCredentials(credentialToVerify).ToAPI();
         }
 
     }

@@ -23,33 +23,37 @@ namespace JwtBehavior.JwtHelpers
             };
             return claims;
         }
-        public static UserTokens GenTokenKey(UserTokens model,JwtSettings jwtSettings)
+        public static UserTokens GenTokenKey(UserTokens model, JwtSettings jwtSettings)
         {
             try
             {
                 UserTokens userTokens = new UserTokens();
-                if (model == null) throw new ArgumentNullException(nameof(model));
+                if (model == null) 
+                    throw new ArgumentNullException(nameof(model));
 
-                    byte[] key = Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
-                    Guid Id = Guid.Empty;
-                    DateTime expireTime = DateTime.UtcNow.AddDays(1);
+                byte[] key = Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
+                Guid Id = Guid.Empty;
+                DateTime expireTime = DateTime.UtcNow.AddDays(1);
 
 
-                    JwtSecurityToken JWTToken = new JwtSecurityToken(
-                        issuer: jwtSettings.ValidIssuer,
-                        audience: jwtSettings.ValidAudience,
-                        claims:GetClaims(model),
-                        notBefore: new DateTimeOffset(DateTime.Now).DateTime,
-                        expires: new DateTimeOffset(expireTime).DateTime,
-                        signingCredentials: new SigningCredentials(
-                            new SymmetricSecurityKey(key),SecurityAlgorithms.HmacSha256
-                            ));
-                
-                    userTokens.Token = new JwtSecurityTokenHandler().WriteToken(JWTToken);
-                    userTokens.IsOwner= model.IsOwner;
-                    userTokens.Id = model.Id;
+                JwtSecurityToken JWTToken = new JwtSecurityToken
+                (
+                    issuer: jwtSettings.ValidIssuer,
+                    audience: jwtSettings.ValidAudience,
+                    claims: GetClaims(model),
+                    notBefore: new DateTimeOffset(DateTime.Now).DateTime,
+                    expires: new DateTimeOffset(expireTime).DateTime,
+                    signingCredentials: new SigningCredentials
+                    (
+                        new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256
+                    )
+                );
 
-                    return userTokens;
+                userTokens.Token = new JwtSecurityTokenHandler().WriteToken(JWTToken);
+                userTokens.IsOwner = model.IsOwner;
+                userTokens.Id = model.Id;
+
+                return userTokens;
             }
             catch (Exception ex)
             {

@@ -39,25 +39,29 @@ namespace DbLabo.Repositories
             UserEntity entity = new UserEntity();
             using (_dbConnect)
             {
-                _dbConnect.Users.Where(us=>us.Email == credentialToVerify).FirstOrDefault();
+               entity =  _dbConnect.Users.Where(us=>us.Email.Equals( credentialToVerify)).FirstOrDefault();
             }
-            return entity ?? new UserEntity();
+            return entity ;
         }
 
         public UserEntity VerifyUser(UserEntity auth)
         {
-            UserEntity? user = new UserEntity();
+            UserEntity user = new UserEntity();
             try
             {
-                if (_dbConnect.Users.Find(auth.Email) != null && _dbConnect.Users.Find(auth.Passwd) != null)
-                {
-                    user = _dbConnect.Users.Find(auth.Email);
+                //if (_dbConnect.Users.Where(us=> us.Email.Equals(auth.Email)) != null)// && _dbConnect.Users.Where(us=> us.Passwd.Equals(auth.Passwd)) != null)
+                //{
+                    user = _dbConnect.Users.Where(us=> us.Email.Equals(auth.Email)).FirstOrDefault();
+                    if(user == null)
+                    {
+                       user = _dbConnect.Users.Find(auth.Email);
+                    }
                     return user;
-                }
-                else
-                {
-                    throw new Exception("this user does not exist ! ");
-                }
+                //}
+                //else
+                //{
+                //    throw new Exception("this user does not exist ! ");
+                //}
             }
             catch (SqlException ex)
             {
