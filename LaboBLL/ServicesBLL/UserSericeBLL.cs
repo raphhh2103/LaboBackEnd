@@ -18,6 +18,16 @@ namespace LaboBLL.ServicesBLL
             this._userRepository = userRepository;
         }
 
+        public UserBLL VerifyUser(UserBLL auth)
+        {
+            return _userRepository.VerifyUser(auth.ToEntity()).ToBLL();
+        }
+
+        public UserBLL GetOwnerCredentials(string credentialToVerify)
+        {
+            return _userRepository.GetOwnerCredentials(credentialToVerify).ToBLL();
+        }
+
         public UserBLL Create(UserBLL entity)
         {
             return _userRepository.Create(entity.ToEntity()).ToBLL();

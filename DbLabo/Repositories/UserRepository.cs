@@ -17,8 +17,6 @@ namespace DbLabo.Repositories
         {
             this._dbConnect = dbConnect;
         }
-
-
         public UserEntity Create(UserEntity entity)
         {
             try
@@ -32,7 +30,37 @@ namespace DbLabo.Repositories
             }
             catch (SqlException ex)
             {
+                throw ex;
+            }
+        }
 
+        public UserEntity GetOwnerCredentials(string credentialToVerify)
+        {
+            UserEntity entity = new UserEntity();
+            using (_dbConnect)
+            {
+                _dbConnect.Users.Where(us=>us.Email == credentialToVerify).FirstOrDefault();
+            }
+            return entity ?? new UserEntity();
+        }
+
+        public UserEntity VerifyUser(UserEntity auth)
+        {
+            UserEntity? user = new UserEntity();
+            try
+            {
+                if (_dbConnect.Users.Find(auth.Email) != null && _dbConnect.Users.Find(auth.Passwd) != null)
+                {
+                    user = _dbConnect.Users.Find(auth.Email);
+                    return user;
+                }
+                else
+                {
+                    throw new Exception("this user does not exist ! ");
+                }
+            }
+            catch (SqlException ex)
+            {
                 throw ex;
             }
         }
@@ -60,7 +88,6 @@ namespace DbLabo.Repositories
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
         }
@@ -78,7 +105,6 @@ namespace DbLabo.Repositories
             }
             catch (SqlException ex)
             {
-
                 throw ex;
             }
         }
