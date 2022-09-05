@@ -20,6 +20,7 @@ namespace LaboBackEnd.Controllers
         }
 
         [HttpPost]
+        //[Route("/User/Create")]
         public IActionResult UserCreating(UserAPI user)
         {
             byte[] salt = Crypto.GenerateSalt();
@@ -32,12 +33,14 @@ namespace LaboBackEnd.Controllers
         }
 
         [HttpGet("{Email}")]
+        //[Route("/User/GetOne")]
         public IActionResult GetUser(string Email)
         {
             return Ok(_userServiceBLL.GetOne(Email).ToAPI());
         }
 
         [HttpPut("{Email}")]
+        //[Route("/User/Update")]
         public IActionResult UpdateUser(string Email, [FromBody] UserAPI userModified)
         {
             UserBLL us = _userServiceBLL.GetOne(Email);

@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("index", b => b.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+    options.AddPolicy("AllowAll", b => b.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 });
 JwtSettings BindJwtSettings = new JwtSettings();
 //Microsoft.Extensions.IConfiguration.Bind("JsonWebTokenKeys",BindJwtSettings);
