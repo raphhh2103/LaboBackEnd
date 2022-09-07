@@ -1,11 +1,13 @@
 ﻿using LaboBackEnd.MapperAPI;
 using LaboBackEnd.ModelsAPI;
 using LaboBLL.ServicesBLL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("BasicStat")]
     public class BasicsStatisticController : ControllerBase

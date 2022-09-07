@@ -7,8 +7,13 @@ using LaboBLL.ModelsBLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using jwt = JwtBehavior.JwtHelpers;
+using Microsoft.AspNetCore.Authorization;
+
+
+
 namespace LaboBackEnd.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("Account")]
     public class AccountController : ControllerBase
@@ -22,7 +27,9 @@ namespace LaboBackEnd.Controllers
             this._accountService = accountService;
         }
        
+        
         [HttpPost]
+        //[AllowAnonymous]
         public IActionResult GetAuth (UserAPI userLogins)
         {
             UserBLL user = new UserBLL();

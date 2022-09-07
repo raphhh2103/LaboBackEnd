@@ -5,9 +5,12 @@ using LaboBLL.ServicesBLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LaboBackEnd.MapperAPI;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaboBackEnd.Controllers
 {
+    //[Authorize]
+    [AllowAnonymous]
     [ApiController]
     [Route("User")]
     public class UserController : ControllerBase
@@ -18,7 +21,7 @@ namespace LaboBackEnd.Controllers
         {
             this._userServiceBLL = userSericeBLL;
         }
-
+        [AllowAnonymous]
         [HttpPost]
         //[Route("/User/Create")]
         public IActionResult UserCreating(UserAPI user)
@@ -31,7 +34,7 @@ namespace LaboBackEnd.Controllers
             _userServiceBLL.Create(us);
             return Ok();
         }
-
+        //[Authorize("Random")]
         [HttpGet("{Email}")]
         //[Route("/User/GetOne")]
         public IActionResult GetUser(string Email)

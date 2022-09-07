@@ -2,11 +2,13 @@
 using LaboBackEnd.ModelsAPI;
 using LaboBLL.ModelsBLL;
 using LaboBLL.ServicesBLL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaboBackEnd.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("AffinityChamp")]
     public class AffinityChampController : ControllerBase

@@ -3,9 +3,11 @@ using LaboBLL.ServicesBLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using LaboBackEnd.MapperAPI;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaboBackEnd.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("Champ")]
     public class ChampController : ControllerBase
@@ -47,6 +49,7 @@ namespace LaboBackEnd.Controllers
             return Ok(_champService.GetOne(Name));
         }
 
+        //[Authorize("User")]
         [HttpPut("Name")]
         public IActionResult UpdateChamp(string Name, [FromBody] ChampAPI champ)
         {
