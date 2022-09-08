@@ -60,7 +60,7 @@ namespace LaboBackEnd.Controllers
                 ch.Name = champ.Name;
                 ch.Affinity = champ.Affinity;
                 ch.Skills = champ.Skills;
-                ch.BasicsStatistics = champ.BasicsStatistics;
+                ch.BasicsStatisticsId = champ.BasicsStatisticsId;
                 _champService.Update(ch.ToBLL());
             }
             return Ok(ch);

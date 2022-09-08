@@ -7,14 +7,17 @@ namespace LaboBackEnd.MapperAPI
     {
         public static ChampBLL ToBLL(this ChampAPI champ)
         {
-            return new ChampBLL()
+            ChampBLL result =  new ChampBLL()
             {
                 Name= champ.Name,
                 Affinity= champ.Affinity,
-                BasicsStatistics= champ.BasicsStatistics,
+                //BasicsStatistics.IdBasicsStatistic = champ.BasicsStatisticsId,
+                //BasicsStatistics.IdBasicsStatistic = champ.BasicsStatisticsId,
                 IdChamp= champ.IdChamp,
                 Skills= champ.Skills,
             };
+            result.BasicsStatistics.IdBasicsStatistic = champ.BasicsStatisticsId;
+            return result;
         }
 
         public static ChampAPI ToAPI(this ChampBLL champ)
@@ -23,7 +26,7 @@ namespace LaboBackEnd.MapperAPI
             {
                 Name = champ.Name,
                 Affinity = champ.Affinity,
-                BasicsStatistics = champ.BasicsStatistics,
+                BasicsStatisticsId = champ.BasicsStatistics.IdBasicsStatistic,
                 IdChamp = champ.IdChamp,
                 Skills = champ.Skills,
             };

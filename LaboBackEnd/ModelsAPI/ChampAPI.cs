@@ -7,7 +7,7 @@ namespace LaboBackEnd.ModelsAPI
         public int IdChamp { get; set; }
         public string Name { get; set; }
 
-        public BasicsStatisticBLL? BasicsStatistics { get; set; }
+        public int BasicsStatisticsId { get; set; }
 
         public AffinityChampBLL? Affinity { get; set; }
 
