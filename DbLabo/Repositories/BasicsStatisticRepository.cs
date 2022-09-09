@@ -107,6 +107,10 @@ namespace DbLabo.Repositories
                         bst = _dbConnect.BasicsStatistics.Find(id);
                     }
                 }
+                if(bst == null)
+                {
+                    throw new Exception("coucou");
+                }
                 return bst;
             }
             catch (SqlException ex)
